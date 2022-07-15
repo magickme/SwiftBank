@@ -1,6 +1,6 @@
 struct SwiftBank {
     private var password: String = ""
-    init(password: String, initialDeposit: Double ) {
+    init(password: String, initialDeposit: Double) {
         self.password = password
         makeDeposit(ofAmount: initialDeposit)
     }
@@ -19,8 +19,15 @@ struct SwiftBank {
     mutating func makeDeposit(ofAmount depositAmount: Double) -> Double {
         let depositWithBonus = finalDepositWithBonus(fromInitialDeposit: depositAmount)
         print("Making a deposit of $\(depositAmount) with a bonus rate. The final amount deposited is$\(depositWithBonus)")
-        balance += depositWithBonus
+        self.balance += depositWithBonus
         return balance
     }
-    func displayBalance(usingPassword password: String)
+    func displayBalance(usingPassword password: String) {
+        if isValid(password) {
+            print("Your current balance is $\(balance)")
+        } else {
+            print("Error: Invalid password. Cannot retrieve balance.")
+            return
+        }
+    }
 }
